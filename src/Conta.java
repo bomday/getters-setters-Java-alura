@@ -1,10 +1,17 @@
 public class Conta {
+    private static int total; //static é uma variável que terá o valor para a classe e não para o objeto criado
     private double saldo;
     private int agencia;
     private int numero;
     private Cliente titular;
 
-    public Conta() {
+    public Conta(int agencia, int numero) {
+        total++;
+        this.agencia = agencia;
+        this.numero = numero;
+
+        System.out.println("O total de contas é: " + total);
+        System.out.println("nova conta " + this.agencia + " criada");
     }
 
     public void deposita(double valor) {
@@ -39,6 +46,10 @@ public class Conta {
     }
 
     public void setNumero(int numero) {
+        if(numero <= 0){
+            System.out.println("Não é aceito valores menores ou iguais a zero");
+            return;
+        }
         this.numero = numero;
     }
 
@@ -47,6 +58,10 @@ public class Conta {
     }
 
     public void setAgencia(int agencia) {
+        if(agencia <= 0) {
+            System.out.println("Não é aceito valores menores ou iguais a zero");
+            return;
+        }
         this.agencia = agencia;
     }
 
@@ -56,5 +71,11 @@ public class Conta {
 
     public Cliente getTitular() {
         return this.titular;
+    }
+
+    public static int getTotal() {
+        //coloca static também para poder chamar o get a partir da classe
+        //dentro de métodos static não pode utilizar variáveis não statics
+        return total;
     }
 }
